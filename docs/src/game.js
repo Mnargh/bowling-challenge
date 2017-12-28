@@ -3,6 +3,6 @@ function Game(){
 };
 
 Game.prototype.addPlayer = function(newplayer){
-  this.newPlayer = newplayer
+  this.newPlayer = newplayer;
   this.players.push(this.newPlayer);
 };
