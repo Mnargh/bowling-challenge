@@ -19,6 +19,12 @@ describe("Players", function(){
     });
   });
 
+  describe("Recording scores of frames", function(){
+    it("Open frames (no strike or spare)", function(){
+
+    });
+  });
+
 
 
 });
