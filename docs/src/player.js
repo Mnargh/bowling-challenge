@@ -32,12 +32,22 @@ Player.prototype.bowl = function(roll){
 };
 
 Player.prototype.manageFrames = function(){
+  this.assignCurrentFrame();
+  this.assignPreviousFrame();
+  this.assignPreviousPreviousFrame();
+};
+
+Player.prototype.assignCurrentFrame =function(){
   if(this.currentFrame.isCompleted){
     this.currentFrame = this.frames[this.frames.indexOf(this.currentFrame)+1];
   }
+};
+Player.prototype.assignPreviousFrame =function(){
   if(this.frames.length >= 2){
     this.previousFrame = this.frames[this.frames.indexOf(this.currentFrame)-1];
   }
+};
+Player.prototype.assignPreviousPreviousFrame =function(){
   if(this.frames.length >= 3){
     this.previousPreviousFrame = this.frames[this.frames.indexOf(this.currentFrame)-2];
   }
