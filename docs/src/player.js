@@ -3,6 +3,8 @@ function Player(name){
   this.score = 0;
   this.frames = [];
   this.currentFrame = null;
+  this.previousFrame = null;
+  this.previousPreviousFrame = null;
 };
 
 Player.prototype.addFrame = function(newframe = new Frame()){
@@ -32,6 +34,12 @@ Player.prototype.bowl = function(roll){
 Player.prototype.manageFrames = function(){
   if(this.currentFrame.isCompleted){
     this.currentFrame = this.frames[this.frames.indexOf(this.currentFrame)+1];
+  }
+  if(this.frames.length >= 2){
+    this.previousFrame = this.frames[this.frames.indexOf(this.currentFrame)-1];
+  }
+  if(this.frames.length >= 3){
+    this.previousPreviousFrame = this.frames[this.frames.indexOf(this.currentFrame)-2];
   }
 };
 // Player.prototype.updateFrameScore = function(){

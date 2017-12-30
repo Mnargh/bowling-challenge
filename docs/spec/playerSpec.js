@@ -10,6 +10,8 @@ describe("Players", function(){
     completeframe = jasmine.createSpyObj('completeframe', {'isCompleted': function(){
       true;
     }});
+
+
     // openframe = jasmine.createSpyObj('openframe',
     // {
     //   'firstRollScore' : function(){ firstRollScore = 5;},
@@ -65,11 +67,23 @@ describe("Players", function(){
     });
   });
 
-  // describe("Bowling", function(){
-  //   it("Player bowling calls the bowl function in the current frame", function(){
-  //
-  //   });
-  // });
+  describe("Previous frames", function(){
+    it("Identifies the previous frame as the one before the current frame", function(){
+      player.initialiseFrames();
+      player.bowl(10);
+      player.bowl(10);
+      expect(player.currentFrame).toEqual(player.frames[2]);
+      expect(player.previousFrame).toEqual(player.frames[1]);
+    });
+    it("Identifies the previous previous frame as the one before the previous frame", function(){
+      player.initialiseFrames();
+      player.bowl(10);
+      player.bowl(10);
+      expect(player.currentFrame).toEqual(player.frames[2]);
+      expect(player.previousPreviousFrame).toEqual(player.frames[0]);
+    });
+
+  });
 
 
 
