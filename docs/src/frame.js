@@ -33,9 +33,9 @@ Frame.prototype.setRollScore = function(roll){
 }
 
 Frame.prototype.manageRoll = function(){
-  if(this.isFinalFrame === false && (this.rollNumber === 2 || this.isStrike)){
-    this.isCompleted = true;
-  }
+  this.checkNormalFrameComplete();
+  this.checkFinalFrameComplete();
+
   if(this.isCompleted === false){
     this.rollNumber += 1;
   }
@@ -65,6 +65,19 @@ Frame.prototype.checkIfSpare = function(roll){
   }
 };
 
+Frame.prototype.checkNormalFrameComplete = function(){
+  if(this.isFinalFrame === false && (this.rollNumber === 2 || this.isStrike)){
+    this.isCompleted = true;
+  }
+};
+
+Frame.prototype.checkFinalFrameComplete = function(){
+  if(this.isFinalFrame === true && ((this.firstRollScore + this.secondRollScore < 10) || ( this.rollNumber === 3 )))
+  {
+    this.isCompleted = true;
+  }
+};
+
 Frame.prototype.makeFinalFrame = function(){
   this.isFinalFrame = true;
 };
@@ -74,13 +87,13 @@ Frame.prototype.invalidThrowScore = function(){
 };
 
 Frame.prototype.noSecondThrowCheck = function(){
-  if(this.isStrike === true){
+  if(this.isFinalFrame === false && this.isStrike === true){
     throw new Error("No second throw after a strike");
   }
 };
 
 Frame.prototype.pinLimitErrorCheck = function(roll){
-  if( (roll + this.firstRollScore) > 10){
+  if(this.isFinalFrame === false && ((roll + this.firstRollScore) > 10)){
     throw new Error("Cannot total more than 10 over two rolls unless it's the last frame");
   }
 };

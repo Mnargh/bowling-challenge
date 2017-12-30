@@ -70,6 +70,28 @@ describe("Frames", function(){
       frame.bowl(9);
       expect(frame.isCompleted).toEqual(true);
     });
+    describe("Completing the final frame", function(){
+      it("Recording an open frame completes the final frame", function(){
+        frame.makeFinalFrame();
+        frame.bowl(5);
+        frame.bowl(4);
+        expect(frame.isCompleted).toEqual(true);
+      });
+      it("Bowling a spare and another roll completes the final frame", function(){
+        frame.makeFinalFrame();
+        frame.bowl(4);
+        frame.bowl(6);
+        frame.bowl(3);
+        expect(frame.isCompleted).toEqual(true);
+      });
+      it("Making 3 strikes completes the final frame", function(){
+        frame.makeFinalFrame();
+        frame.bowl(10);
+        frame.bowl(10);
+        frame.bowl(10);
+        expect(frame.isCompleted).toEqual(true);
+      });
+    });
   });
 
   // describe("Recording scores of frames", function(){
