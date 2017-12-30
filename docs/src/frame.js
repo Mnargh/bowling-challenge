@@ -72,7 +72,7 @@ Frame.prototype.checkNormalFrameComplete = function(){
 };
 
 Frame.prototype.checkFinalFrameComplete = function(){
-  if(this.isFinalFrame === true && ((this.firstRollScore + this.secondRollScore < 10) || ( this.rollNumber === 3 )))
+  if(this.isFinalFrame === true && ( ( (this.firstRollScore + this.secondRollScore < 10) && (this.secondRollScore !== null))|| ( this.rollNumber === 3 )))
   {
     this.isCompleted = true;
   }

@@ -13,7 +13,7 @@ Player.prototype.addFrame = function(newframe = new Frame()){
     this.currentFrame = this.frames[0];
 };
 
-Player.prototype.initialiseFrames = function(){
+Player.prototype.initializeFrames = function(){
   for (i = 1; i <= 10; i++){
     this.addFrame();
   }
@@ -28,6 +28,7 @@ Player.prototype.createFinalFrame = function(){
 
 Player.prototype.bowl = function(roll){
   this.currentFrame.bowl(roll);
+  this.updateFrameScore();
   this.manageFrames();
 };
 
@@ -38,7 +39,7 @@ Player.prototype.manageFrames = function(){
 };
 
 Player.prototype.assignCurrentFrame =function(){
-  if(this.currentFrame.isCompleted){
+  if(this.currentFrame.isCompleted && !this.currentFrame.isFinalFrame){
     this.currentFrame = this.frames[this.frames.indexOf(this.currentFrame)+1];
   }
 };
@@ -52,7 +53,57 @@ Player.prototype.assignPreviousPreviousFrame =function(){
     this.previousPreviousFrame = this.frames[this.frames.indexOf(this.currentFrame)-2];
   }
 };
-// Player.prototype.updateFrameScore = function(){
-//
-//
-// }
+
+
+Player.prototype.updateFrameScore = function(){
+  if(this.currentFrame.isCompleted){
+    if(!this.currentFrame.isFinalFrame){
+        if(!this.currentFrame.isStrike && !this.currentFrame.isSpare){
+          this.currentFrame.score = this.currentFrame.firstRollScore + this.currentFrame.secondRollScore;
+        }
+    //  if(current is strike or spare){
+    //     do not calculate score yet
+    //    }
+    }
+    if(this.currentFrame.isFinalFrame){
+        if(!this.currentFrame.isStrike && !this.currentFrame.isSpare){
+          this.currentFrame.score = (this.currentFrame.firstRollScore + this.currentFrame.secondRollScore);
+        }
+    }
+  }
+}
+  //   // current frame score
+  //   if(current frame is not last frame){
+  //       if(current is not strike or spare){
+  //         current frame score = r1s + r2s
+  //       }
+  //       if(current is strike or spare){
+  //         do not calculate score yet
+  //       }
+  //   }
+  //   if(current frame is last frame){
+  //       if(current is not strike or spare){
+  //         current frame score = r1s + r2s
+  //       }
+  //       if(current is strike or spare){
+  //         current frame score = r1s + r2s + r3s
+  //       }
+  //   }
+  //   //previous frame score
+  //   if(previous frame is strike){
+  //       if (current frame is not strike){
+  //        previous frame score = 10 + r1s + r2s
+  //       }
+  //       if (current frame is strike){
+  //        do not calculate score yet
+  //       }
+  //   }
+  //   if(previous frame is spare){
+  //     previous frame score = 10 + r1s
+  //   }
+  //
+  //   //previous previous frame score
+  //   if(previous previous frame is strike & previous frame is strike){
+  //     previous previous frame score = 10 + previous r1s + current r1s
+  //   }
+  // }
