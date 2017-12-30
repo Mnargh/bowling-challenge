@@ -25,15 +25,18 @@ describe("Players", function(){
     it("Player initialises with a score of 0", function(){
       expect(player.score).toEqual(0);
     });
+  });
+
+  describe("Initializing Frames", function(){
     it("Player starts game with 10 empty frames", function(){
       player.initialiseFrames();
       expect(player.frames.length).toEqual(10);
     });
-    // it("10th frame is identified as the final frame", function(){
-    //   player.initialiseFrames();
-    //   expect(player.frames[-2].isFinal).toEqual(false);
-    //   expect(player.frames[-1].isFinal).toEqual(true);
-    // });
+    it("10th frame is identified as the final frame", function(){
+      player.initialiseFrames();
+      expect(player.frames[player.frames.length-2].isFinalFrame).toEqual(false);
+      expect(player.frames[player.frames.length-1].isFinalFrame).toEqual(true);
+    });
   });
 
   describe("Bowling", function(){
@@ -42,7 +45,6 @@ describe("Players", function(){
       player.bowl(5);
       expect(frame.bowl).toHaveBeenCalledWith(5);
     });
-
   });
 
   describe("Current frame", function(){
@@ -61,8 +63,15 @@ describe("Players", function(){
       player.bowl(10);
       expect(player.currentFrame).toEqual(player.frames[3]);
     });
-
   });
+
+  describe("Bowling", function(){
+    it("Player bowling calls the bowl function in the current frame", function(){
+      
+    });
+  });
+
+
 
   // describe("Recording scores of frames", function(){
   //   it("Open frames (no strike or spare scored)", function(){

@@ -70,6 +70,10 @@ Frame.prototype.recordSpare = function(){
   this.isSpare = true;
 };
 
+Frame.prototype.makeFinalFrame = function(){
+  this.isFinalFrame = true;
+};
+
 Frame.prototype.invalidThrowScore = function(){
   throw new Error("Can only roll between 0 and 10");
 };
