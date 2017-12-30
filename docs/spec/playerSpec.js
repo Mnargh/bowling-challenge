@@ -65,11 +65,11 @@ describe("Players", function(){
     });
   });
 
-  describe("Bowling", function(){
-    it("Player bowling calls the bowl function in the current frame", function(){
-      
-    });
-  });
+  // describe("Bowling", function(){
+  //   it("Player bowling calls the bowl function in the current frame", function(){
+  //
+  //   });
+  // });
 
 
 

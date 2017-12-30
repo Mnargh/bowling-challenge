@@ -43,31 +43,26 @@ Frame.prototype.manageRoll = function(){
 
 Frame.prototype.firstRoll = function(roll){
   this.firstRollScore = roll;
-  if(this.firstRollScore === 10){
-    this.recordStrike();
-  }
+  this.checkIfStrike();
 };
 
 Frame.prototype.secondRoll = function(roll){
-  if(this.isStrike === true){
-    this.noSecondThrow();
-  }
-  if( (roll + this.firstRollScore) > 10){
-    this.pinLimitError();
-  }
-
-  if( (roll + this.firstRollScore) === 10){
-    this.recordSpare();
-  }
+  this.noSecondThrowCheck();
+  this.pinLimitErrorCheck(roll);
+  this.checkIfSpare(roll);
   this.secondRollScore = roll;
 };
 
-Frame.prototype.recordStrike = function(){
-  this.isStrike = true;
+Frame.prototype.checkIfStrike = function(){
+  if(this.firstRollScore === 10){
+    this.isStrike = true;
+  }
 };
 
-Frame.prototype.recordSpare = function(){
-  this.isSpare = true;
+Frame.prototype.checkIfSpare = function(roll){
+  if( (roll + this.firstRollScore) === 10){
+    this.isSpare = true;
+  }
 };
 
 Frame.prototype.makeFinalFrame = function(){
@@ -78,10 +73,14 @@ Frame.prototype.invalidThrowScore = function(){
   throw new Error("Can only roll between 0 and 10");
 };
 
-Frame.prototype.noSecondThrow = function(){
-  throw new Error("No second throw after a strike");
+Frame.prototype.noSecondThrowCheck = function(){
+  if(this.isStrike === true){
+    throw new Error("No second throw after a strike");
+  }
 };
 
-Frame.prototype.pinLimitError = function(){
-  throw new Error("Cannot total more than 10 over two rolls unless it's the last frame");
+Frame.prototype.pinLimitErrorCheck = function(roll){
+  if( (roll + this.firstRollScore) > 10){
+    throw new Error("Cannot total more than 10 over two rolls unless it's the last frame");
+  }
 };
