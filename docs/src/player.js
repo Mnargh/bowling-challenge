@@ -2,6 +2,7 @@ function Player(name){
   this.name = name;
   this.score = 0;
   this.frames = [];
+  this.currentframe = this.frames[0];
 };
 
 Player.prototype.addFrame = function(newframe = new Frame()){
@@ -14,3 +15,8 @@ Player.prototype.initialiseFrames = function(){
     this.addFrame();
   }
 }
+
+// Player.prototype.updateFrameScore = function(){
+//
+//
+// }

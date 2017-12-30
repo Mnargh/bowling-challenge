@@ -1,9 +1,15 @@
 describe("Players", function(){
   var player;
-  var frame = jasmine.createSpyObj('frame', ['']);
+  var openframe;
 
   beforeEach(function(){
     player = new Player("Tom");
+    openframe = jasmine.createSpyObj('openframe',
+    {
+      'firstRollScore' : function(){ firstRollScore = 5;},
+      'secondRollScore' : function(){ secondRollScore = 4;}
+    });
+
   });
 
   describe("Creating new players", function(){
@@ -20,9 +26,15 @@ describe("Players", function(){
   });
 
   describe("Recording scores of frames", function(){
-    it("Open frames (no strike or spare)", function(){
-
-    });
+    // it("Open frames (no strike or spare scored)", function(){
+    //   player.frames.push(openframe);
+    //   openframe.firstRollScore.and.returnValue(5);
+    //   openframe.secondRollScore.and.returnValue(4);
+    //   expect(openframe.firstRollScore()).toEqual(5);
+    //   expect(openframe.secondRollScore()).toEqual(4);
+    //   expect(player.updateFrameScore()).toEqual(9);
+    //
+    // });
   });
 
 
