@@ -6,6 +6,7 @@ function Frame(){
   this.isSpare = null;
   this.score = null;
   this.isCompleted = false;
+  this.isFinalFrame = false;
 };
 
 Frame.prototype.bowl = function(roll){
@@ -32,8 +33,11 @@ Frame.prototype.setRollScore = function(roll){
 }
 
 Frame.prototype.manageRoll = function(){
+  if(this.isFinalFrame === false && (this.rollNumber === 2 || this.isStrike)){
+    this.isCompleted = true;
+  }
   if(this.isCompleted === false){
-    this.rollNumber++;
+    this.rollNumber += 1;
   }
 }
 
