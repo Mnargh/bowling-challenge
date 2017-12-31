@@ -85,28 +85,61 @@ describe("Players", function(){
   });
 
   describe("Calculating scores of frames", function(){
-    it("Scores an open frame that is not the final frame", function(){
-      player.initializeFrames();
-      player.bowl(4);
-      player.bowl(5);
-      expect(player.frames[0].score).toEqual(9);
+    describe("Calculating previous frames' scores after current frame's first roll", function(){
+      it("Scores a spare frame after next frame's first roll", function(){
+        player.initializeFrames();
+        player.bowl(3);
+        player.bowl(7);
+        expect(player.previousFrame.isSpare).toEqual(true);
+        player.bowl(5);
+        expect(player.previousFrame.score).toEqual(15);
+      });
+      it("Scores the first of two consecutive strikes after the current frame's first roll", function(){
+        player.initializeFrames();
+        player.bowl(10);
+        player.bowl(10);
+        expect(player.frames[0].score).toEqual(null);
+        player.bowl(3);
+        expect(player.frames[0].score).toEqual(23);
+      });
     });
-    it("Scores an open frame that is the final frame", function(){
-      player.initializeFrames();
-      player.bowl(10);
-      player.bowl(10);
-      player.bowl(10);
-      player.bowl(10);
-      player.bowl(10);
-      player.bowl(10);
-      player.bowl(10);
-      player.bowl(10);
-      player.bowl(10);
-      player.bowl(3);
-      player.bowl(3);
-      expect(player.frames[9].score).toEqual(6);
+    describe("Calculating after a frame is complete", function(){
+      describe("Non-final frames", function(){
+        it("Scores an open frame", function(){
+          player.initializeFrames();
+          player.bowl(4);
+          player.bowl(5);
+          expect(player.frames[0].score).toEqual(9);
+        });
+        it("Scores a strike frame after next frame's second roll if it is an open frame", function(){
+          player.initializeFrames();
+          player.bowl(10);
+          expect(player.frames[0].score).toEqual(null);
+          player.bowl(3);
+          expect(player.frames[0].score).toEqual(null);
+          player.bowl(6);
+          expect(player.frames[0].score).toEqual(19);
+        });
+        it("Scores a strike frame after next frame's second roll if it is a spare frame", function(){
+          player.initializeFrames();
+          player.bowl(10);
+          expect(player.frames[0].score).toEqual(null);
+          player.bowl(3);
+          expect(player.frames[0].score).toEqual(null);
+          player.bowl(7);
+          expect(player.frames[0].score).toEqual(20);
+        });
+      });
+      describe("Final frames", function(){
+        it("Scores an open frame that is the final frame", function(){
+          player.initializeFrames();
+          for (var i=1; i <= 9; i++) player.bowl(10);
+          player.bowl(3);
+          player.bowl(3);
+          expect(player.frames[9].score).toEqual(6);
+        });
+      });
     });
-
 
   });
 

@@ -66,7 +66,7 @@ Frame.prototype.checkIfSpare = function(roll){
 };
 
 Frame.prototype.checkNormalFrameComplete = function(){
-  if(this.isFinalFrame === false && (this.rollNumber === 2 || this.isStrike)){
+  if(!this.isFinalFrame && (this.rollNumber === 2 || this.isStrike)){
     this.isCompleted = true;
   }
 };

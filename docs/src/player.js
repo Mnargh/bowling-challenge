@@ -56,11 +56,25 @@ Player.prototype.assignPreviousPreviousFrame =function(){
 
 
 Player.prototype.updateFrameScore = function(){
+  if(!this.currentFrame.isCompleted){
+      if(this.previousFrame && this.previousFrame.isSpare){
+        this.previousFrame.score = 10 + this.currentFrame.firstRollScore;
+      }
+      if(this.previousPreviousFrame && this.previousPreviousFrame.isStrike && this.previousFrame.isStrike){
+        this.previousPreviousFrame.score = 20 + this.currentFrame.firstRollScore;
+      }
+  }
   if(this.currentFrame.isCompleted){
     if(!this.currentFrame.isFinalFrame){
         if(!this.currentFrame.isStrike && !this.currentFrame.isSpare){
           this.currentFrame.score = this.currentFrame.firstRollScore + this.currentFrame.secondRollScore;
+          if(this.previousFrame && this.previousFrame.isStrike){
+            this.previousFrame.score = (10 + this.currentFrame.firstRollScore + this.currentFrame.secondRollScore);
+          }
         }
+        // if(this.currentFrame.isSpare){
+        //
+        // }
     //  if(current is strike or spare){
     //     do not calculate score yet
     //    }
@@ -69,8 +83,12 @@ Player.prototype.updateFrameScore = function(){
         if(!this.currentFrame.isStrike && !this.currentFrame.isSpare){
           this.currentFrame.score = (this.currentFrame.firstRollScore + this.currentFrame.secondRollScore);
         }
+        // if(current is strike or spare){
+        //         current frame score = r1s + r2s + r3s
+        //       }
     }
   }
+
 }
   //   // current frame score
   //   if(current frame is not last frame){
