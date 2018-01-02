@@ -55,7 +55,7 @@ describe("Frames", function(){
     });
   });
 
-  describe("Completing frame", function(){
+  describe("Completing frames", function(){
     it("Recording an open frame (no strike or spare) completes the frame", function(){
       frame.bowl(5);
       frame.bowl(4);

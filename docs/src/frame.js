@@ -2,6 +2,7 @@ function Frame(){
   this.rollNumber = 1;
   this.firstRollScore = null;
   this.secondRollScore = null;
+  this.thirdRollScore = null;
   this.isStrike = null;
   this.isSpare = null;
   this.score = null;
@@ -26,9 +27,9 @@ Frame.prototype.setRollScore = function(roll){
     case (this.rollNumber === 2):
       this.secondRoll(roll);
       break;
-    // case (this.rollNumber === 3):
-    //   this.thirdRoll(roll);
-    //   break;
+    case (this.rollNumber === 3):
+      this.thirdRoll(roll);
+      break;
   }
 }
 
@@ -51,6 +52,11 @@ Frame.prototype.secondRoll = function(roll){
   this.pinLimitErrorCheck(roll);
   this.checkIfSpare(roll);
   this.secondRollScore = roll;
+};
+
+Frame.prototype.thirdRoll = function(roll){
+  this.thirdRollScore = roll;
+  this.checkIfStrike();
 };
 
 Frame.prototype.checkIfStrike = function(){

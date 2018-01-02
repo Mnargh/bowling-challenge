@@ -129,6 +129,17 @@ describe("Players", function(){
           player.bowl(7);
           expect(player.frames[0].score).toEqual(20);
         });
+        it("Scores multiple consecutive strikes",function(){
+          player.initializeFrames();
+          player.bowl(10);
+          player.bowl(10);
+          player.bowl(10);
+          player.bowl(10);
+          player.bowl(10);
+          expect(player.frames[0].score).toEqual(30);
+          expect(player.frames[1].score).toEqual(30);
+          expect(player.frames[2].score).toEqual(30);
+        });
       });
       describe("Final frames", function(){
         it("Scores an open frame that is the final frame", function(){
@@ -138,24 +149,121 @@ describe("Players", function(){
           player.bowl(3);
           expect(player.frames[9].score).toEqual(6);
         });
+        it("Scores a spare frame", function(){
+          player.initializeFrames();
+          for (var i=1; i <= 9; i++) player.bowl(10);
+          player.bowl(3);
+          player.bowl(7);
+          player.bowl(5);
+          expect(player.frames[9].score).toEqual(15);
+        });
       });
     });
+  });
 
+  describe("Player can complete their game", function(){
+    it("Completing the final frame finishes the game for the player", function(){
+      player.initializeFrames();
+      for (var i=1; i <= 12; i++) player.bowl(10);
+      expect(player.isFinished).toEqual(true);
+    });
+  });
+
+  describe("Totalling scores", function(){
+    it("Calculates the final score of the player at the end of their game", function(){
+      player.initializeFrames();
+      for (var i=1; i <= 12; i++) player.bowl(10);
+      expect(player.finalScore).toEqual(300);
+    });
+
+    it("Adds the score to the player's running total at the first opportunity it can be calculated", function(){
+      player.initializeFrames();
+      player.bowl(8);
+      player.bowl(2); //frame 1
+      player.bowl(5);
+      player.bowl(4); //frame 2
+      expect(player.score).toEqual(24)
+      player.bowl(9);
+      player.bowl(0); //frame 3
+      expect(player.score).toEqual(33)
+      player.bowl(10); //frame 4
+      expect(player.score).toEqual(33)
+      player.bowl(10); //frame 5
+      expect(player.score).toEqual(33)
+      player.bowl(5);
+      expect(player.score).toEqual(58)
+      player.bowl(5); //frame 6
+      expect(player.score).toEqual(78)
+      player.bowl(5);
+      expect(player.score).toEqual(93)
+      player.bowl(3); //frame 7
+      expect(player.score).toEqual(101)
+      player.bowl(6);
+      player.bowl(3); //frame 8
+      expect(player.score).toEqual(110)
+      player.bowl(9);
+      player.bowl(1); //frame 9
+      player.bowl(9);
+      expect(player.score).toEqual(129)
+      player.bowl(1);
+      player.bowl(10); // frame 10
+      expect(player.score).toEqual(149)
+
+    });
   });
 
 
 
-  // describe("Recording scores of frames", function(){
-  //   it("Open frames (no strike or spare scored)", function(){
-  //     player.frames.push(openframe);
-  //     openframe.firstRollScore.and.returnValue(5);
-  //     openframe.secondRollScore.and.returnValue(4);
-  //     expect(openframe.firstRollScore()).toEqual(5);
-  //     expect(openframe.secondRollScore()).toEqual(4);
-  //     expect(player.updateFrameScore()).toEqual(9);
-  //
-  //   });
-  // });
+  describe("Full games", function(){
+    it("Mix of strikes, spares and open frames", function(){
+      player.initializeFrames();
+      player.bowl(8);
+      player.bowl(2); //frame 1
+      player.bowl(5);
+      player.bowl(4); //frame 2
+      player.bowl(9);
+      player.bowl(0); //frame 3
+      player.bowl(10); //frame 4
+      player.bowl(10); //frame 5
+      player.bowl(5);
+      player.bowl(5); //frame 6
+      player.bowl(5);
+      player.bowl(3); //frame 7
+      player.bowl(6);
+      player.bowl(3); //frame 8
+      player.bowl(9);
+      player.bowl(1); //frame 9
+      player.bowl(10);
+      player.bowl(10);
+      player.bowl(10); // frame 10
+      expect(player.frames[0].score).toEqual(15);
+      expect(player.frames[1].score).toEqual(9);
+      expect(player.frames[2].score).toEqual(9);
+      expect(player.frames[3].score).toEqual(25);
+      expect(player.frames[4].score).toEqual(20);
+      expect(player.frames[5].score).toEqual(15);
+      expect(player.frames[6].score).toEqual(8);
+      expect(player.frames[7].score).toEqual(9);
+      expect(player.frames[8].score).toEqual(20);
+      expect(player.frames[9].score).toEqual(30);
+      expect(player.finalScore).toEqual(160);
+    });
+
+    it("Perfect Game", function(){
+      player.initializeFrames();
+      for (var i=1; i <= 12; i++) player.bowl(10);
+      expect(player.frames[0].score).toEqual(30);
+      expect(player.frames[1].score).toEqual(30);
+      expect(player.frames[2].score).toEqual(30);
+      expect(player.frames[3].score).toEqual(30);
+      expect(player.frames[4].score).toEqual(30);
+      expect(player.frames[5].score).toEqual(30);
+      expect(player.frames[6].score).toEqual(30);
+      expect(player.frames[7].score).toEqual(30);
+      expect(player.frames[8].score).toEqual(30);
+      expect(player.frames[9].score).toEqual(30);
+    });
+  });
 
 
 

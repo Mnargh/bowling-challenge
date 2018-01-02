@@ -2,14 +2,17 @@ function Player(name){
   this.name = name;
   this.score = 0;
   this.frames = [];
+  this.runningTotals = [];
   this.currentFrame = null;
   this.previousFrame = null;
   this.previousPreviousFrame = null;
+  this.isFinished = false;
+  this.finalScore = 0
 };
 
+
 Player.prototype.addFrame = function(newframe = new Frame()){
-    this.newFrame = newframe;
-    this.frames.unshift(this.newFrame);
+    this.frames.unshift(newframe);
     this.currentFrame = this.frames[0];
 };
 
@@ -33,6 +36,7 @@ Player.prototype.bowl = function(roll){
 };
 
 Player.prototype.manageFrames = function(){
+  this.isGameComplete();
   this.assignCurrentFrame();
   this.assignPreviousFrame();
   this.assignPreviousPreviousFrame();
@@ -42,6 +46,9 @@ Player.prototype.assignCurrentFrame =function(){
   if(this.currentFrame.isCompleted && !this.currentFrame.isFinalFrame){
     this.currentFrame = this.frames[this.frames.indexOf(this.currentFrame)+1];
   }
+  // if(this.currentFrame.isCompleted && this.currentFrame.isFinalFrame){
+  //
+  // }
 };
 Player.prototype.assignPreviousFrame =function(){
   if(this.frames.length >= 2){
@@ -54,6 +61,45 @@ Player.prototype.assignPreviousPreviousFrame =function(){
   }
 };
 
+Player.prototype.calcFinalScore = function(){
+  if (this.isFinished === true){
+    for (var i = 0; i <= 9; i++){
+      this.finalScore += this.frames[i].score;
+    }
+  }
+};
+
+Player.prototype.calcRunningTotal = function(){
+  this.runningTotals = [];
+
+    for ( i = 1; i <= (this.frames.indexOf(this.currentFrame)+1); i++){
+      var runningTotal = 0;
+      for (var j = 0; j <= (i-1); j++){
+        if (this.frames[j].score === null){
+          this.updateCurrentRunningTotal();
+          return;
+        }
+        runningTotal += this.frames[j].score;
+
+      }
+      this.runningTotals.push(runningTotal);
+    }
+    this.updateCurrentRunningTotal();
+};
+
+Player.prototype.updateCurrentRunningTotal = function(){
+  this.score = this.runningTotals[this.runningTotals.length-1];
+};
+
+Player.prototype.isGameComplete = function(){
+  if (this.currentFrame.isFinalFrame && this.currentFrame.isCompleted){
+    this.isFinished = true;
+  }
+  this.calcFinalScore();
+};
+
+
+
 
 Player.prototype.updateFrameScore = function(){
   if(!this.currentFrame.isCompleted){
@@ -65,63 +111,48 @@ Player.prototype.updateFrameScore = function(){
       }
   }
   if(this.currentFrame.isCompleted){
+
     if(!this.currentFrame.isFinalFrame){
-        if(!this.currentFrame.isStrike && !this.currentFrame.isSpare){
-          this.currentFrame.score = this.currentFrame.firstRollScore + this.currentFrame.secondRollScore;
-          if(this.previousFrame && this.previousFrame.isStrike){
-            this.previousFrame.score = (10 + this.currentFrame.firstRollScore + this.currentFrame.secondRollScore);
-          }
+        if(this.previousPreviousFrame && this.previousPreviousFrame.isStrike && this.previousFrame.isStrike){
+          this.previousPreviousFrame.score = 20 + this.currentFrame.firstRollScore;
         }
-        // if(this.currentFrame.isSpare){
-        //
-        // }
-    //  if(current is strike or spare){
-    //     do not calculate score yet
-    //    }
-    }
-    if(this.currentFrame.isFinalFrame){
         if(!this.currentFrame.isStrike && !this.currentFrame.isSpare){
           this.currentFrame.score = (this.currentFrame.firstRollScore + this.currentFrame.secondRollScore);
+          //open frame
+          if(this.previousFrame && this.previousFrame.isStrike){
+            this.previousFrame.score = (10 + this.currentFrame.firstRollScore + this.currentFrame.secondRollScore);
+            // previous is strike
+          }
         }
-        // if(current is strike or spare){
-        //         current frame score = r1s + r2s + r3s
-        //       }
+        if(this.currentFrame.isSpare){
+          if(this.previousFrame && this.previousFrame.isStrike){
+            this.previousFrame.score = (10 + this.currentFrame.firstRollScore + this.currentFrame.secondRollScore);
+            // previous is strike
+          }
+        }
+        if(this.currentFrame.isStrike){
+          // do not calc score yet
+        }
+
+    }
+    if(this.currentFrame.isFinalFrame){
+        if(this.previousPreviousFrame && this.previousPreviousFrame.isStrike && this.previousFrame.isStrike){
+          this.previousPreviousFrame.score = 20 + this.currentFrame.firstRollScore;
+        }
+        if(this.previousFrame && this.previousFrame.isStrike){
+          this.previousFrame.score = (10 + this.currentFrame.firstRollScore + this.currentFrame.secondRollScore);
+          // previous is strike
+        }
+        if(!this.currentFrame.isStrike && !this.currentFrame.isSpare){
+          this.currentFrame.score = (this.currentFrame.firstRollScore + this.currentFrame.secondRollScore);
+          //open frame
+
+        }
+        if(this.currentFrame.isStrike || this.currentFrame.isSpare){
+          this.currentFrame.score = (this.currentFrame.firstRollScore + this.currentFrame.secondRollScore + this.currentFrame.thirdRollScore);
+        }
+
     }
   }
-
-}
-  //   // current frame score
-  //   if(current frame is not last frame){
-  //       if(current is not strike or spare){
-  //         current frame score = r1s + r2s
-  //       }
-  //       if(current is strike or spare){
-  //         do not calculate score yet
-  //       }
-  //   }
-  //   if(current frame is last frame){
-  //       if(current is not strike or spare){
-  //         current frame score = r1s + r2s
-  //       }
-  //       if(current is strike or spare){
-  //         current frame score = r1s + r2s + r3s
-  //       }
-  //   }
-  //   //previous frame score
-  //   if(previous frame is strike){
-  //       if (current frame is not strike){
-  //        previous frame score = 10 + r1s + r2s
-  //       }
-  //       if (current frame is strike){
-  //        do not calculate score yet
-  //       }
-  //   }
-  //   if(previous frame is spare){
-  //     previous frame score = 10 + r1s
-  //   }
-  //
-  //   //previous previous frame score
-  //   if(previous previous frame is strike & previous frame is strike){
-  //     previous previous frame score = 10 + previous r1s + current r1s
-  //   }
-  // }
+  this.calcRunningTotal();
+};
