@@ -2,22 +2,108 @@
 <html>
 <head>
   <script src="game.js"></script>
-</head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
 <body>
   <style>
+
   </style>
   <script src="jquery.js"></script>
+  <script> var game = new Game </script>
 
-  <div id="container">
-    <div>
-      <script> var game = new Game </script>
-      <form>
-        <input type='text' name='search_tag' placeholder='tag'><br>
-        <!-- <button type='submit' value='Create New Player'> -->
-        <input type='submit' value='Search tag'>
-      </form>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+      </div>
+      <div class="col-sm-4" align="center">
+        <div id="pagetitle">
+        Bowling!
+        </div>
+      </div>
+      <div class="col-sm-4">
+      </div>
     </div>
-  </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group" style="padding: 20px; font-size: 10px;" >
+          <form>
+            <label for="player_name">Player Name:</label>
+            <input type='text' name='player_name' placeholder='Player Name'>
+            <input type='submit' name='add_player' value='Create New Player'>
+          </form>
+          <button>Begin Game</button>
+        </div>
+      </div>
+      <div class="col-sm-4" align="center">
+        <div id="bowlscore">
+          Choose your score!
+          <select>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-4">
+      </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-sm-1">
+        </div>
+        <div class="col-sm-10" align="center">
+          <table class="framestable">
+            <tr class="framenumber">
+              <th colspan="9" rowspan="3">Player Name</th>
+              <th colspan="6">Frame 1</th>
+              <th colspan="6">Frame 2</th>
+              <th colspan="6">Frame 3</th>
+              <th colspan="6">Frame 4</th>
+              <th colspan="6">Frame 5</th>
+              <th colspan="6">Frame 3</th>
+              <th colspan="6">Frame 7</th>
+              <th colspan="6">Frame 8</th>
+              <th colspan="6">Frame 9</th>
+              <th colspan="9">Frame 10</th>
+            </tr>
+            <tr class="rollscores">
+              <td colspan='3' class="firstroll" id="frame1"></td><td class="secondroll" id="frame1"colspan='3'></td>
+              <td colspan='3' class="firstroll" id="frame2"></td><td class="secondroll" id="frame2" colspan='3'></td>
+              <td colspan='3' class="firstroll" id="frame3"></td><td class="secondroll" id="frame3" colspan='3'></td>
+              <td colspan='3' class="firstroll" id="frame4"></td><td class="secondroll" id="frame4" colspan='3'></td>
+              <td colspan='3' class="firstroll" id="frame5"></td><td class="secondroll" id="frame5" colspan='3'></td>
+              <td colspan='3' class="firstroll" id="frame6"></td><td class="secondroll" id="frame6" colspan='3'></td>
+              <td colspan='3' class="firstroll" id="frame7"></td><td class="secondroll" id="frame7" colspan='3'></td>
+              <td colspan='3' class="firstroll" id="frame8"></td><td class="secondroll" id="frame8" colspan='3'></td>
+              <td colspan='3' class="firstroll" id="frame9"></td><td class="secondroll" id="frame9" colspan='3'></td>
+              <td colspan='3' class="firstroll" id="frame10"></td><td class="secondroll" id="frame10" colspan='3'></td><td colspan='3' class="thirdroll" id="frame10"></td>
+            </tr>
+            <tr class="framescores">
+              <td colspan='6'id="frame1"></td>
+              <td colspan='6'id="frame2"></td>
+              <td colspan='6'id="frame3"></td>
+              <td colspan='6'id="frame4"></td>
+              <td colspan='6'id="frame5"></td>
+              <td colspan='6'id="frame6"></td>
+              <td colspan='6'id="frame7"></td>
+              <td colspan='6'id="frame8"></td>
+              <td colspan='6'id="frame9"></td>
+              <td colspan='9'id="frame10"></td>
+            </tr>
 
+          </table>
+        </div>
+
+    </div>
+
+
+
+  </div>
 </body>
 </html>
