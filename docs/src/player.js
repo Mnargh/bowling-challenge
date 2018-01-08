@@ -26,6 +26,7 @@ Player.prototype.initializeFrames = function(){
 Player.prototype.createFinalFrame = function(){
   if(this.frames.length === 10)
   { this.frames[9].makeFinalFrame(); }
+  // maybe dont need make final frame as other method
 };
 
 
@@ -60,10 +61,10 @@ Player.prototype.assignPreviousPreviousFrame =function(){
 
 Player.prototype.calcFinalScore = function(){
   if (this.isFinished === true){
-    // for (var i = 0; i <= 9; i++){
-    //   this.finalScore += this.frames[i].score;
-    // }
-    this.finalScore = this.runningTotals[this.runningTotals.length-1];
+    for (var i = 0; i <= 9; i++){
+      this.finalScore += this.frames[i].score;
+    }
+    // this.finalScore = this.runningTotals[this.runningTotals.length-1];
   }
 };
 

@@ -8,6 +8,9 @@ $(document).ready(function(){
     $(".rollscores #player_name").html(game.players[0].name);
   });
 
+  $("#bowl_0").click(function(){
+    bowl(0);
+  });
   $("#bowl_1").click(function(){
     bowl(1);
   });
@@ -82,4 +85,30 @@ updateCurrentScore = function(){
   $('.framescores #frame8').html(game.players[0].runningTotals[7]);
   $('.framescores #frame9').html(game.players[0].runningTotals[8]);
   $('.framescores #frame10').html(game.players[0].runningTotals[9]);
+}
+
+
+$(document).append(buildGameView(game));
+
+function buildGameView(game) {
+  $container = $("<div></div>");
+  $container.append(buildScoreTable(game));
+  return $container;
+}
+
+function buildScoreTable(game) {
+  $table = $("<div></div>");
+
+  return $table;
+}
+
+function buildTableHeader(game) {
+  var frameViews = [];
+  for (var index = 0; index < game.numberOfFrames) {
+    frameViews.push(buildFrame(game.frames[i]));
+  }
+}
+
+function buildRowForPlayer(player) {
+
 }

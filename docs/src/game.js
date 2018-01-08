@@ -13,6 +13,7 @@ Game.prototype.addPlayer = function(newplayer){
   this.newPlayer = newplayer;
   this.players.push(this.newPlayer);
   this.players[this.players.length-1].initializeFrames();
+  // make new player initializeFrames
 };
 
 Game.prototype.bowl = function(roll){

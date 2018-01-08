@@ -34,6 +34,7 @@ Frame.prototype.setRollScore = function(roll){
 }
 
 Frame.prototype.manageRoll = function(){
+  // put if statements for if it is a final frame or not and take out of methods
   this.checkNormalFrameComplete();
   this.checkFinalFrameComplete();
 
