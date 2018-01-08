@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="game.js"></script>
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="jquery.js"></script>
+  <script src="game.js"></script>
+  <script src="player.js"></script>
+  <script src="frame.js"></script>
+
+
 <body>
   <style>
 
   </style>
-  <script src="jquery.js"></script>
+
   <script> var game = new Game </script>
 
   <div class="container">
@@ -25,16 +32,19 @@
     </div>
     <div class="row">
       <div class="col-sm-4">
-        <div class="form-group" style="padding: 20px; font-size: 10px;" >
-          <form>
-            <label for="player_name">Player Name:</label>
-            <input type='text' name='player_name' placeholder='Player Name'>
-            <input type='submit' name='add_player' value='Create New Player'>
-          </form>
-          <button>Begin Game</button>
-        </div>
+
       </div>
       <div class="col-sm-4" align="center">
+        <div id="form-group" style="padding: 20px; font-size: 10px;" >
+          <form id="player_name_form">
+            <label for="player_name">Player Name:</label>
+            <input type='text' name ='player_name' placeholder='Player Name'>
+            <!-- <input type='submit' name='add_player' value='Create New Player'> -->
+            <button id="add_player" type="button">Add Player</button>
+          </form>
+          <br>
+          <button id="begin_game" type="button">Begin Game</button>
+        </div>
         <div id="bowlscore">
           Choose your score!
           <select>

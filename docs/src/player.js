@@ -46,9 +46,6 @@ Player.prototype.assignCurrentFrame =function(){
   if(this.currentFrame.isCompleted && !this.currentFrame.isFinalFrame){
     this.currentFrame = this.frames[this.frames.indexOf(this.currentFrame)+1];
   }
-  // if(this.currentFrame.isCompleted && this.currentFrame.isFinalFrame){
-  //
-  // }
 };
 Player.prototype.assignPreviousFrame =function(){
   if(this.frames.length >= 2){
@@ -102,6 +99,7 @@ Player.prototype.isGameComplete = function(){
 
 
 Player.prototype.updateFrameScore = function(){
+  // needs major refactoring
   if(!this.currentFrame.isCompleted){
       if(this.previousFrame && this.previousFrame.isSpare){
         this.previousFrame.score = 10 + this.currentFrame.firstRollScore;

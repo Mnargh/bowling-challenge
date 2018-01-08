@@ -18,6 +18,7 @@ Game.prototype.addPlayer = function(newplayer){
 Game.prototype.bowl = function(roll){
   this.players[this.turn-1].bowl(roll);
   this.isGameComplete();
+  //needs refactoring
   if (this.players[this.turn-1].currentFrame.isFinalFrame === false){
       if(this.players[this.turn-1].currentFrame.firstRollScore === null){
         this.nextPlayerTurn();
