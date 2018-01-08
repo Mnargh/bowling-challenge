@@ -16,6 +16,9 @@ Game.prototype.addPlayer = function(newplayer){
 };
 
 Game.prototype.bowl = function(roll){
+  if(this.isCompleteGame){
+    return;
+  }
   this.players[this.turn-1].bowl(roll);
   this.isGameComplete();
   //needs refactoring

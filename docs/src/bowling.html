@@ -31,10 +31,10 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-4">
+      <div class="col-sm-3">
 
       </div>
-      <div class="col-sm-4" align="center">
+      <div class="col-sm-6" align="center">
         <div id="form-group" style="padding: 20px; font-size: 10px;" >
           <form id="player_name_form">
             <label for="player_name">Player Name:</label>
@@ -45,23 +45,23 @@
           <br>
           <button id="begin_game" type="button">Begin Game</button>
         </div>
-        <div id="bowlscore">
+        <div id="scoredropdown">
           Choose your score!
-          <select>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-          </select>
+          <button id="bowl_1" type="button">1</button>
+          <button id="bowl_2" type="button">2</button>
+          <button id="bowl_3" type="button">3</button>
+          <button id="bowl_4" type="button">4</button>
+          <button id="bowl_5" type="button">5</button>
+          <button id="bowl_6" type="button">6</button>
+          <button id="bowl_7" type="button">7</button>
+          <button id="bowl_8" type="button">8</button>
+          <button id="bowl_9" type="button">9</button>
+          <button id="bowl_10" type="button">10</button>
         </div>
+        <br>
+        <br>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-3">
       </div>
     </div>
     <div class="row-fluid">
@@ -70,7 +70,7 @@
         <div class="col-sm-10" align="center">
           <table class="framestable">
             <tr class="framenumber">
-              <th colspan="9" rowspan="3">Player Name</th>
+              <th colspan="9"></th>
               <th colspan="6">Frame 1</th>
               <th colspan="6">Frame 2</th>
               <th colspan="6">Frame 3</th>
@@ -83,6 +83,7 @@
               <th colspan="9">Frame 10</th>
             </tr>
             <tr class="rollscores">
+              <th colspan="9" rowspan="2" id="player_name"></th>
               <td colspan='3' class="firstroll" id="frame1"></td><td class="secondroll" id="frame1"colspan='3'></td>
               <td colspan='3' class="firstroll" id="frame2"></td><td class="secondroll" id="frame2" colspan='3'></td>
               <td colspan='3' class="firstroll" id="frame3"></td><td class="secondroll" id="frame3" colspan='3'></td>

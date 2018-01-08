@@ -60,9 +60,10 @@ Player.prototype.assignPreviousPreviousFrame =function(){
 
 Player.prototype.calcFinalScore = function(){
   if (this.isFinished === true){
-    for (var i = 0; i <= 9; i++){
-      this.finalScore += this.frames[i].score;
-    }
+    // for (var i = 0; i <= 9; i++){
+    //   this.finalScore += this.frames[i].score;
+    // }
+    this.finalScore = this.runningTotals[this.runningTotals.length-1];
   }
 };
 
