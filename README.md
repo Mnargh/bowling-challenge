@@ -2,40 +2,74 @@
 Bowling Challenge
 =================
 
-* Challenge time: rest of the day and weekend.
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+## Description
 
-## The Task
+A pure javascript web app that calculates the scores for a game of bowling for one or more players.
 
-Count and sum the scores of a bowling game for one player (in JavaScript).
+For a refresher on the rules of bowling, please check out the [rules](#Rules)
+
+For details about my [process](#Design-Process), [tests](#Running-tests) and [retrospective](#Retrospective), please visit the relevant sections!
+
+## Setup
+
+Clone the repository in the command line using the command 
+
+`git clone https://github.com/Mnargh/bowling-challenge.git`
+
+
+## Usage
+
+To launch the app, open 'bowling.html' in the browser by right clicking on the file, and 'selecting open in browser'.
+
+![alt text](./images/bowling-screenshot.png "Gameplay Screenshot")
+
+
+## Running tests
+
+Testing is in Jasmine. To run the tests, open 'SpecRunner.html' in the browser.
+
+![alt text](./images/testing-screenshot.png "Testing Screenshot")
+
+## Design Process
+
+I began my planning for the program by establishing what classes would be necessary for a fully functioning single player game, and the responsibilities each class would have.
+
+Some basic diagrams of the methods and responsibilities of each class helped clarify what the architecture of the program would look like. 
+
+## Retrospective 
+
+### What went well
+
+* Separating the responsibilities of each component of the game in to its own class helped with understanding the overall challenge and breaking it down in to smaller problems to be solved step by step.
+
+* Implicating above and beyond the specification of the challenge, by enabling multiple player to play in the same game. Each player takes turns to bowl in the normal style.
+
+* I was also pleased with managing to implement a running total that would only be calculated and displayed when actually possible given the scores a player had made i.e. a strike frame score would only appear once that frame's individual score could be calculated with the next two rolls.
+
+
+### What could be better
+
+   * Large portions of the code need refactoring, in particular the updateFrameScore function in the player class which is a behemoth of if statements at present. This is quite horrendous and definitely needs examining for shared behaviour to be refactored out.
+
+   * The frame score table is hard coded to be an entire component in itself. A function could be created to build up a frame box, and called multiple times to create the full table.
+
+* Currently, only the score of the first player appears in the frame scores table, and those of the other players can only be seen in the console.
+
+### What I would do with more time
+
+   * Add a theme and make the page look beautiful
+   * Make the interface more user friendly
+   * Complete the framescore table so that it also displays the score of the other players
+   * A victory message for the winner
+   * Check for more edge cases
+   * Refactor 
+   * Set up [Travis CI](https://travis-ci.org) to run tests.
+   * Add [ESLint](http://eslint.org/) to your codebase and make the code conform.
+
+
+## Rules
 
 A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
-
-As usual please start by
-
-* Forking this repo
-
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am.  And since next week is lab week you have a full extra week to work on this.
-
-___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
-
-Also, don't generate random rolls. Trust us on this one.
-
-### Optional Extras
-
-In any order you like:
-
-* Create a nice interactive animated interface with jQuery.
-* Set up [Travis CI](https://travis-ci.org) to run your tests.
-* Add [ESLint](http://eslint.org/) to your codebase and make your code conform.
-
-You might even want to start with ESLint early on in your work — to help you
-learn Javascript conventions as you go along.
-
-## Bowling — how does it work?
 
 ### Strikes
 
@@ -66,11 +100,4 @@ More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
 
-## Code Review
 
-In code review we'll be hoping to see:
-
-* All tests passing
-* The code is elegant: every class has a clear responsibility, methods are short etc.
-
-Reviewers will potentially be using this [code review rubric](docs/review.md).  Note that referring to this rubric in advance may make the challenge somewhat easier.  You should be the judge of how much challenge you want.
