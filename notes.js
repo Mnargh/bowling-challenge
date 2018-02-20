@@ -31,7 +31,7 @@ function Engine(hp) {
  }
 
  var driver = Driver("tom");
- driver.car = new Car("wv", new Engine(256)));
+ driver.car = new Car("wv", new Engine(256));
  driver.drive();
 
  // Engine with 256 hp has been started...
