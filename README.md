@@ -8,7 +8,7 @@ A pure javascript web app that calculates the scores for a game of bowling for o
 
 For a refresher on the rules of bowling, please check out the [rules](#Rules)
 
-For details about my [process](#Design-Process), [tests](#Running-tests) and [retrospective](#Retrospective), please visit the relevant sections!
+For details about my [process](#Design Process), [tests](#Running tests) and [retrospective](#Retrospective), please visit the relevant sections!
 
 ## Setup
 
